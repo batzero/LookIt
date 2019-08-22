@@ -215,20 +215,90 @@ def deep_machine(img) :
     # cv.imwrite('./text_local_' + str(img) + '.png', resimg)
     cv.waitKey(0)
     cv.destroyAllWindows()
-    print(answer)
+    #print(answer)
     return answer
     # print(answer)
     # return answer
 path_dir = './service/static/upload'
 def dl_folder():
     answer = [[],[],[],[],[]]
-# path_dir = './static/upload'
+    # path_dir = './static/upload'
     file_list = os.listdir(path_dir)
     # file_list2 = os.listdir('./')
     # print(file_list2)
+    filecount =0
     for f in file_list:
-        print(f)
+        #print(f)
+        filecount +=1
         answer +=deep_machine(path_dir+'/'+f)
-
+    """    
     print(answer)
+    print('hi')
+    print(answer.__getitem__(6))
+    """
+
+    #개별 응답 결과
+
+    sur = []
+    for count in range(0, filecount):
+        line = []
+        for i in range(6, 10):
+            line.append(answer[i][count])
+        sur.append(line)
+    print(sur)
+
+
+    #문항별 응답 결과
+    question1 = answer.__getitem__(6)
+    question2 = answer[7]
+    question3 = answer[8]
+    question4 = answer[9]
+
+
+    #print(question1)
+    #print(question2)
+
+    def add(questionNum):
+        number1 = 0
+        number2 = 0
+        number3 = 0
+        number4 = 0
+        number5 = 0
+        for i in questionNum:
+            if i == 1:
+                number1 += 1
+            if i == 2:
+                number2 += 1
+            if i == 3:
+                number3 += 1
+            if i == 4:
+                number4 += 1
+            if i == 5:
+                number5 += 1
+        surveyResult = []
+        surveyResult.append(number1)
+        surveyResult.append(number2)
+        surveyResult.append(number3)
+        surveyResult.append(number4)
+        surveyResult.append(number5)
+        return surveyResult
+
+
+    sResult1= add(question1)
+    sResult2= add(question2)
+    sResult3 = add(question3)
+    sResult4 = add(question4)
+    #print(sResult1)
+    sResult = []
+    sResult.append(sResult1)
+    sResult.append(sResult2)
+    sResult.append(sResult3)
+    sResult.append(sResult4)
+    sResult.append(sur)
+
+    print(sResult)
+    return sResult
+    #return answer
+
+
 # deep_machine('./doc/img1.jpg')
